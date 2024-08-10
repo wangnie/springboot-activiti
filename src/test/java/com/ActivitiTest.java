@@ -60,6 +60,6 @@ public class ActivitiTest {
 
     @Test
     public void test3() {
-        System.out.println("错误提交");
+        System.out.println("----错误提交-----");
     }
 }

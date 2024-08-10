@@ -1,0 +1,30 @@
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123
+    #    加上nullCatalogMeansCurrent=true才能自动创建activiti需要的表
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+
+  activiti:
+    database-schema-update: true
+    check-process-definitions: true
+    #  注意，如果activiti后面加上了/，就要求启动的时候process文件夹中需要有流程定义文件
+    #  是指定activiti流程描述文件的前缀（路径），启动时，activiti就会去寻找此路径下的流程描述文件，并且自动部署
+    process-definition-location-prefix: classpath:/activiti/
+    #  suffix 是一个String数组，表示描述文件的默认后缀名，默认**.bpmn和**.bpmn20.xml
+    #    process-definition-location-suffixes:
+    #      - **.bpmn
+    #      - **.bpmn20.xml
+    #  Activiti7历史数据无法自动插入，开启下面两个配置
+    history-level: audit
+    db-history-used: true
+#  mapper.xml文件所在路径
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
